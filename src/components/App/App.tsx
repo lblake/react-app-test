@@ -1,13 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { TradersContainer } from "../../components";
 
-const App = () => {
+export const App: React.FC = () => {
+  const handleClick = () => {
+    console.log("Hi");
+    console.log(
+      "new GreetingServiceImp().currentGreeting()",
+      new GreetingServiceImp().currentGreeting()
+    );
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p onClick={handleClick}>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
@@ -19,8 +28,9 @@ const App = () => {
           Learn React
         </a>
       </header>
+      <TradersContainer />
     </div>
   );
-}
+};
 
-export default App;
+
