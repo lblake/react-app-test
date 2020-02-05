@@ -7,7 +7,7 @@ import { fetchTradersSuccess, fetchTradersError } from "./actions";
 function* tradersFetchWorker() {
   try {
     const traders = yield call(fetchTradersApiCall);
-    put(fetchTradersSuccess(traders));
+    yield put(fetchTradersSuccess(traders));
   } catch (err) {
     console.error("error in fetch traders", err);
     put(fetchTradersError("error in fetch traders"));
