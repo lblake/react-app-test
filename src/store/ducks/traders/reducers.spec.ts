@@ -1,4 +1,4 @@
-import { tradersReducer, initialState } from './reducers'
+import tradersReducer, { initialState } from './reducers'
 import { fetchTradersAction } from './actions'
 import { ITrader } from 'src/api/traders'
 
