@@ -3,7 +3,7 @@ FROM node:erbium as builder
 WORKDIR /app
 
 COPY package.json .
-COPY package-lock.lock .
+COPY package-lock.json .
 
 RUN npm install
 
