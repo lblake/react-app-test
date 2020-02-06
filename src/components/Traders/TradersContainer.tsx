@@ -1,39 +1,24 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { ITradersState } from "../../store/ducks/traders/types";
-import { fetchTraders } from "../../store/ducks/traders/actions";
+import { TradersList } from './TradersList/TradersList'
+import { ITrader } from 'src/api/traders'
+import { fetchTradersAction } from 'src/store/ducks/traders/actions'
+import { IStoreState } from 'src/store/rootReducer'
 
-import { IStoreState } from "../../store/rootReducer";
+const TradersContainer: React.FC = () => {
+  const dispatch = useDispatch()
+  const traders = useSelector<IStoreState, ITrader[]>(state => state.tradersReducer.traders)
 
- import { TradersList } from "./TradersList/TradersList";
+  const fetchTraders = useCallback(() => {
+    dispatch(fetchTradersAction.start(null))
+  }, [dispatch])
 
-interface Props {
-  traders: ITradersState;
-  fetchTraders: () => {};
+  useEffect(() => {
+    fetchTraders()
+  }, [fetchTraders])
+
+  return <TradersList traders={traders} />
 }
 
-const Traders: React.FC<Props> = ({ traders, fetchTraders }) => {
-  useEffect(() => {
-    fetchTraders();
-
-    return () => {};
-  }, []);
-
-  return <TradersList traders={traders.data} />;
-};
-
-const mapStateToProps = ({
-  traders
-}: IStoreState): { traders: ITradersState } => {
-  return { traders };
-};
-
-const mapDispatchToProps = {
-  fetchTraders
-};
-
-export const TradersContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Traders);
+export default TradersContainer

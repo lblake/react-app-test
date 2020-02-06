@@ -1,31 +1,45 @@
-import {
-  ActionTypes,
-  Action,
-  ITradersState
-} from "./types";
+import { ITrader } from 'src/api/traders'
+import { fetchTradersAction } from './actions'
+
+export interface ITradersState {
+  traders: ITrader[]
+  error: string
+  isLoading: boolean
+}
 
 export const initialState: ITradersState = {
-  data: [],
-  errors: [],
-  loading: false
-};
+  traders: [],
+  error: '',
+  isLoading: false,
+}
 
-export const tradersReducer = (
+interface ErrorData {
+  error: string
+}
+
+const tradersReducer = (
   state: ITradersState = initialState,
-  action: Action
-) => {
+  action: {
+    type: string
+    payload?: ITrader[] | ErrorData
+  }
+): ITradersState => {
   switch (action.type) {
-    case ActionTypes.FETCH_TRADERS:
-      return { ...state, loading: true };
-    case ActionTypes.FETCH_TRADERS_SUCCESS: {
-      return { ...initialState, data: action.payload };
+    case fetchTradersAction.loadingType:
+      return { ...state, isLoading: true }
+    case fetchTradersAction.successType: {
+      return { ...initialState, traders: action.payload as ITrader[] }
     }
-    case ActionTypes.FETCH_TRADERS_ERROR: {
+    case fetchTradersAction.errorType: {
+      const { error } = action.payload as ErrorData
       return {
-        ...state
-      };
+        ...state,
+        error,
+      }
     }
     default:
-      return state;
+      return state
   }
-};
+}
+
+export default tradersReducer

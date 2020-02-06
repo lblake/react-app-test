@@ -1,16 +1,16 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { TradersContainer } from "../../components";
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import { TradersContainer } from '../../components'
 
 export const App: React.FC = () => {
   const handleClick = () => {
-    console.log("Hi");
+    console.log('Hi')
     console.log(
-      "new GreetingServiceImp().currentGreeting()",
-      new GreetingServiceImp().currentGreeting()
-    );
-  };
+      'new GreetingServiceImp().currentGreeting()'
+      // new GreetingServiceImp().currentGreeting()
+    )
+  }
 
   return (
     <div className="App">
@@ -30,7 +30,5 @@ export const App: React.FC = () => {
       </header>
       <TradersContainer />
     </div>
-  );
-};
-
-
+  )
+}

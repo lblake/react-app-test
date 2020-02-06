@@ -1,12 +1,11 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux'
 
-import { tradersReducer } from "./ducks/traders/reducers";
-import {ITradersState} from "./ducks/traders/types"
+import tradersReducer, { ITradersState } from './ducks/traders/reducers'
 
 export interface IStoreState {
-  traders: ITradersState;
+  tradersReducer: ITradersState
 }
 
 export const rootReducer = combineReducers<IStoreState>({
-  traders: tradersReducer
-});
+  tradersReducer,
+})
